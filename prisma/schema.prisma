@@ -16,3 +16,16 @@ model Waitlist {
   createdAt DateTime @default(now())
 }
 
+model Club {
+  id        Int     @id @default(autoincrement())
+  title     String
+  address   String
+  phone     String?
+  rating    Float?
+  category  String?
+  logo      String?
+  website   String?
+  html_logo String?
+  keyword   String
+  location  String
+}
