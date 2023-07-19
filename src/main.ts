@@ -25,6 +25,7 @@ async function bootstrap() {
     .setDescription('The Maze API description')
     .setVersion('1.0')
     .addTag('Waitlist')
+    .addTag('Club')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
