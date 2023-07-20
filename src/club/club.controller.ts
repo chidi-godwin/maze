@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ClubService } from './club.service';
 import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ClubsQuery } from './dto/get-clubs.dto';
 
 @ApiTags('Club')
 @Controller('club')
@@ -25,8 +27,8 @@ export class ClubController {
 
   @ApiOperation({ summary: 'Get all clubs' })
   @Get()
-  async findAll() {
-    return this.clubService.findAll();
+  async findAll(@Query() query: ClubsQuery) {
+    return this.clubService.findAll(query);
   }
 
   @ApiOperation({ summary: 'Get a club by id' })
