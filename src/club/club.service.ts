@@ -14,7 +14,7 @@ export class ClubService {
   }
 
   async findAll(query: ClubsQuery) {
-    const { limit, page, orderBy, rating, category } = query;
+    const { orderBy, rating, category, limit = 10, page = 1 } = query;
 
     let skip = 0;
     let take = 10;
@@ -45,7 +45,23 @@ export class ClubService {
       };
     }
 
-    return this.clubRepository.findAll(take, skip, orderByObj, where);
+    const clubs = await this.clubRepository.findAll(
+      take,
+      skip,
+      orderByObj,
+      where,
+    );
+
+    const count = await this.clubRepository.count(where);
+
+    console.log(count, page, limit);
+
+    return {
+      clubs,
+      count,
+      page,
+      limit,
+    };
   }
 
   async findOne(id: number) {

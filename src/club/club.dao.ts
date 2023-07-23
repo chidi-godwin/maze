@@ -8,7 +8,11 @@ export class ClubRepository {
     return this.prismaService.club.create({ data });
   }
 
-  async findAll(take, skip, orderBy, where) {
+  async count(where: any) {
+    return this.prismaService.club.count({ where });
+  }
+
+  async findAll(take: number, skip: number, orderBy: any, where: any) {
     return this.prismaService.club.findMany({
       where,
       take,
