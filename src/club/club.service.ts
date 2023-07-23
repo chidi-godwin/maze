@@ -54,8 +54,6 @@ export class ClubService {
 
     const count = await this.clubRepository.count(where);
 
-    console.log(count, page, limit);
-
     return {
       clubs,
       count,

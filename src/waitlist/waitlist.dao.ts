@@ -6,11 +6,7 @@ export class WaitlistRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: any) {
-    try {
-      return this.prismaService.waitlist.create({ data });
-    } catch (error) {
-      console.log(error);
-    }
+    return this.prismaService.waitlist.create({ data });
   }
 
   async findAll() {
