@@ -59,4 +59,8 @@ export class ClubService {
   async remove(id: number) {
     return this.clubRepository.remove(id);
   }
+
+  async searchTitle(title: string) {
+    return this.clubRepository.searchTitle(title);
+  }
 }

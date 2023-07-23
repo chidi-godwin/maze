@@ -17,6 +17,23 @@ export class ClubRepository {
     });
   }
 
+  async searchTitle(title: string) {
+    return this.prismaService.club.findMany({
+      where: {
+        title: {
+          search: title,
+        },
+      },
+      orderBy: {
+        _relevance: {
+          fields: ['title'],
+          search: title,
+          sort: 'desc',
+        },
+      },
+    });
+  }
+
   async findOne(id: number) {
     return this.prismaService.club.findUniqueOrThrow({ where: { id } });
   }

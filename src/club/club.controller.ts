@@ -51,4 +51,10 @@ export class ClubController {
   async remove(@Param('id') id: string) {
     return this.clubService.remove(+id);
   }
+
+  @ApiOperation({ summary: 'Search a club by title' })
+  @Get('search/:title')
+  async searchTitle(@Param('title') title: string) {
+    return this.clubService.searchTitle(title);
+  }
 }
