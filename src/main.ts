@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { PrismaClientKnownRequestErrorFilter } from './filters/prismaError.filter';
+import { TransformInterceptor } from './filters/sucess.filter';
+import { CustomExceptionFilter } from './filters/error.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -18,6 +20,12 @@ async function bootstrap() {
 
   // enable global prisma error filter
   app.useGlobalFilters(new PrismaClientKnownRequestErrorFilter());
+
+  // Registering the success interceptor globally
+  app.useGlobalInterceptors(new TransformInterceptor());
+
+  // Registering the error filter globally
+  app.useGlobalFilters(new CustomExceptionFilter());
 
   // enable swagger
   const config = new DocumentBuilder()
